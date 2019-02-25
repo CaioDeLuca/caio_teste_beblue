@@ -1,0 +1,28 @@
+{
+  "name": "caio_teste_api_beblue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "SET NODE_ENV=dev&& nodemon app.js"
+  },
+  "author": "Caio_Luca",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^3.0.1",
+    "consign": "^0.1.6",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "mongoose": "^5.4.14",
+    "spotify-finder": "^2.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.0.0",
+    "supertest": "^3.4.2"
+  }
+}
