@@ -5,8 +5,8 @@ var bodyParser = require('body-parser');
 var Spotify = require('spotify-finder');
 const clientSpotfy = new Spotify({
     consumer: {
-      key: '7edd0d46377e464cb47dc42d1eeccc40', // from v2.1.0 is required
-      secret: '99f6743d711c4e039c52f4fa39ca9eb0' // from v2.1.0 is required
+      key: '', // from v2.1.0 is required
+      secret: '' // from v2.1.0 is required
     }
 });
 
