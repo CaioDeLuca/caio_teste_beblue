@@ -3,6 +3,7 @@ module.exports = function(app) {
     app.post('/cachback', (req, res) => {
 
         app.models.cachbacks.init().then(() => {
+            
             app.models.cachbacks.create({
                 genero: req.body.genero.toUpperCase(),
                 dia_semana: req.body.dia_semana.toUpperCase(),

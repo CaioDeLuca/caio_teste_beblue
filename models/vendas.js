@@ -3,7 +3,7 @@ module.exports = (app) => {
     const Schema = app.database.mongoose.Schema;
 
     const vendaSchema = new Schema({
-        id_cliente: {
+        cpf_cliente: {
             type: String,
             required: true            
         },

@@ -21,9 +21,12 @@ module.exports = (app) => {
                   return/(?:\b|-)([1-9]{1,2}[0]?|100)\b/.test(v);
                 },
                 message: props => `The number ${props.value} is not between 0 and 100!`
-              },
+            },
         }
-    });
 
+    });
+    
+    CashbackSchema.index({ genero: 1, apeldia_semanaido: 1 }, { unique: true });
+    
     return app.database.mongoose.model('Cachbacks', CashbackSchema);
 }

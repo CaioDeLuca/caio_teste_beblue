@@ -2,8 +2,9 @@ module.exports = (app) => {
 
     const Schema = app.database.mongoose.Schema;
     const ItemSchema = new Schema({
-        id_album_spotify: {
-            type: String,
+        album: {
+            type: Schema.Types.ObjectId,
+            ref: 'Albums',
             required: true
         },
         quantidade: {
