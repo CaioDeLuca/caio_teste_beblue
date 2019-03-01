@@ -16,7 +16,11 @@ module.exports = function(app) {
 
                 res.json({ cachback });
             });
-        });
+        }).catch(() => {
+            return res.status(500).json({ 
+                mensagem: "Houve um problema para cadastrar o cachback", err 
+            });
+        })
 
     });
 

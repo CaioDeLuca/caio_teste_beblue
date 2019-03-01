@@ -1,3 +1,4 @@
+var mongoosePaginate = require('mongoose-paginate-v2');
 module.exports = (app) => {
 
     const Schema = app.database.mongoose.Schema;
@@ -32,6 +33,8 @@ module.exports = (app) => {
             required: true            
         }
     });
+
+    albumSchema.plugin(mongoosePaginate);
 
     return app.database.mongoose.model('Albums', albumSchema);
 }

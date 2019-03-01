@@ -26,7 +26,7 @@ module.exports = (app) => {
 
     });
     
-    CashbackSchema.index({ genero: 1, apeldia_semanaido: 1 }, { unique: true });
+    CashbackSchema.index({ genero: 1, dia_semana: 1 }, { unique: true });
     
     return app.database.mongoose.model('Cachbacks', CashbackSchema);
 }

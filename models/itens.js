@@ -13,12 +13,10 @@ module.exports = (app) => {
             min: 1
         },
         valorUnitario: {
-            type: Number,
-            required: true
+            type: Number
         },
         cachback: {
-            type: Number,
-            required: true
+            type: Number
         }
     });
 

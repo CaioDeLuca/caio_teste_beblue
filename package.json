@@ -19,6 +19,7 @@
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "mongoose": "^5.4.14",
+    "mongoose-paginate-v2": "^1.0.23",
     "spotify-finder": "^2.1.1"
   },
   "devDependencies": {

@@ -41,39 +41,60 @@ module.exports = function(app) {
         })
     });
 
-    app.get('/popular-base', (req, res) => {
+    app.get('/albums', (req, res) => {
+
+        var query   = {};
+        var options = {
+            sort:     { nome: 1 },
+            lean:     true,
+            limit:    req.query.limit ? parseInt(req.query.limit) : 1,
+            page: parseInt(req.query.page)
+        };
+
+        console.log(options)
+         
+        app.models.albums.paginate(query, options).then((result) => {
+            
+            res.status(200).send(result);
+        });
+    });
+
+    app.post('/albums/popular-base', (req, res) => {
 
         let params = {
             q: req.query.nome, // required
             type: 'album', // optional for default 'artist,album,track'
             limit: 50 // optional for default 20
         }
-        
+        Promise.all([       
         app.clientSpotfy.search(params).then(data => {
                 
                 data.albums.items.forEach(item => {
+                
+                    app.models.albums.create({
 
-                    app.models.albums.init().then(() => {
+                        nome: item.name,
+                        id_album_spotify: item.id,
+                        url_spotify: item.external_urls.spotify,
+                        data_lancamento: item.release_date,
+                        qtd_musicas: item.total_tracks,
+                        preco: 50.00,
+                        ref_artistas: [item.artists]
+                    }, (err, item) => {
 
-                        app.models.albums.create({
-
-                            nome: item.nome,
-                            id_album_spotify: item.id_album_spotify,
-                            url_spotify: item.url_spotify,
-                            data_lancamento: item.data_lancamento,
-                            qtd_musicas: item.qtd_musicas,
-                            preco: 50.00,
-                            ref_artistas: item.ref_artistas
-                        }, (err, item) => {
-                            if (err) 
-                                return res.status(500).json({ 
-                                mensagem: "Houve um problema para cadastrar o album", err });
-                        });
+                        if (err) 
+                            return res.status(500).json({ 
+                            mensagem: "Houve um problema para cadastrar o album", err });
+                        
                     });
                 });
-                res.status(200).json({ "mensagem":"Base Carregada com sucesso." });
         }).catch(err => {
             res.status(500).json({ mensagem: 'Houve um problema ao carregar buscar albums, erro: '+err});
-        });
+        })
+      ]).then((result) => {
+        res.status(200).json({ "mensagem":"Base Carregada com sucesso." });
+      }).catch(err => {
+        res.status(500).json({ mensagem: 'Houve um problema ao carregar buscar albums, erro: '+err});
+      })
     });
 }
